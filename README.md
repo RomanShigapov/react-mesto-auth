@@ -2,7 +2,7 @@
 # 12-я проектная работа - Mesto-react-auth.
 Яндекс.Практикум курс Web-разработчик студент Роман Шигапов.
 
-[Проект на GitHub Pages](https://RomanShigapov.github.io/mesto-react-auth/)
+[Проект на GitHub Pages](https://RomanShigapov.github.io/react-mesto-auth/)
 
 ### Описание
 Веб-приложение на React, содержащее в себе профиль пользователя и карточки мест, с фотографиями и описанием места.
