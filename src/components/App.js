@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Switch, Route, Redirect } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Api from '../utils/Api';
 import Header from './Header';
@@ -11,12 +11,13 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import DeleteCardConfirmationPopup from './DeleteCardConfirmationPopup';
 import Login from './Login';
+import Register from './Register';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import defaultAvatar from '../images/profile.jpg';
 
 function App() {
 
-  let loggedIn=false;
+  let loggedIn=true;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -187,6 +188,12 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <Header />
       <Switch>
+        <Route path="/sign-in">
+          <Login />
+        </Route>
+        <Route path="/sign-up">
+          <Register />
+        </Route>
         <ProtectedRoute
           exact path="/"
           loggedIn={loggedIn}
@@ -199,13 +206,8 @@ function App() {
           onCardLike={handleCardLike}
           onCardDelete={handleCardDeleteClick}
         />
-        <Route path="/sign-in">
-          <Login
-            name="login"
-            title="Вход"
-            buttonText="Войти"
-            // onSubmit={}
-          />
+        <Route path="*">
+          {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
         </Route>
       </Switch>
       <Footer />

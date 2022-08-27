@@ -1,4 +1,11 @@
 .reg-log-form__submit-button {
   height: 50px;
   text-align: center;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.21;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 2px;
 }

@@ -1,0 +1,15 @@
+.reg-log-form__link {
+  margin: 15px 0 0;
+  text-align: center;
+  color: white;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  text-decoration: none;
+  transition: opacity .3s linear;
+  cursor: pointer;
+}
+
+.reg-log-form__link:hover{
+  opacity: 0.6;
+}
