@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Route, Switch } from "react-router-dom";
+import ProtectedRoute from './ProtectedRoute';
 import Api from '../utils/Api';
 import Header from './Header';
 import Footer from './Footer';
@@ -8,10 +10,13 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import DeleteCardConfirmationPopup from './DeleteCardConfirmationPopup';
+import Login from './Login';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import defaultAvatar from '../images/profile.jpg';
 
 function App() {
+
+  let loggedIn=false;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -181,15 +186,28 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Header />
-      <Main
-        onEditProfile={handleEditProfileClick}
-        onAddPlace={handleAddPlaceClick}
-        onEditAvatar={handleEditAvatarClick}
-        onCardClick={handleCardClick}
-        cards={cards}
-        onCardLike={handleCardLike}
-        onCardDelete={handleCardDeleteClick}
-      />
+      <Switch>
+        <ProtectedRoute
+          exact path="/"
+          loggedIn={loggedIn}
+          component={Main}
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+          cards={cards}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDeleteClick}
+        />
+        <Route path="/sign-in">
+          <Login
+            name="login"
+            title="Вход"
+            buttonText="Войти"
+            // onSubmit={}
+          />
+        </Route>
+      </Switch>
       <Footer />
       <EditProfilePopup
         isOpen={isEditProfilePopupOpen}

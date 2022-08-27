@@ -1,0 +1,11 @@
+.reg-log-form__form-input {
+  background-color: black;
+  color: white;
+  border: none;
+  border-bottom: 2px solid #CCCCCC;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  padding: 0 0 13px;
+  outline: none;
+}

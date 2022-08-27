@@ -64,3 +64,10 @@
   @import url(./blocks/popup/__image/popup__image.css);
   @import url(./blocks/popup/__image-container/popup__image-container.css);
   @import url(./blocks/popup/__image-caption/popup__image-caption.css);
+
+@import url(./blocks/reg-log-form/reg-log-form.css);
+  @import url(./blocks/reg-log-form/__title/reg-log-form__title.css);
+  @import url(./blocks/reg-log-form/__form/reg-log-form__form.css);
+  @import url(./blocks/reg-log-form/__form-inputs/reg-log-form__form-inputs.css);
+  @import url(./blocks/reg-log-form/__form-input/reg-log-form__form-input.css);
+  @import url(./blocks/reg-log-form/__submit-button/reg-log-form__submit-button.css);

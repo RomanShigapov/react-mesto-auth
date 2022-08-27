@@ -1,0 +1,5 @@
+.reg-log-form__form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+}

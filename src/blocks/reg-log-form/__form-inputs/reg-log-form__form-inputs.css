@@ -1,0 +1,8 @@
+.reg-log-form__form-inputs {
+  margin: 0 0 216px;
+  padding: 0;
+  width: 100%;
+  border: none;
+  display: grid;
+  gap: 30px;
+}
