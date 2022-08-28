@@ -3,7 +3,7 @@ import useForm from '../hooks/useForm';
 import RegLogForm from './RegLogForm';
 
 
-function Register({ onRegister, onShowInfo }) {
+function Register({ onRegister }) {
 
   const {values, handleChange, setValues} = useForm({
     email: '',
@@ -12,9 +12,7 @@ function Register({ onRegister, onShowInfo }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    // onRegister(values);
-    // onShowInfo({ text: "Вы успешно зарегистрировались!", isSuccessful: true});
-    onShowInfo({ text: "Что-то пошло не так! Попробуйте еще раз.", isSuccessful: false});
+    onRegister(values);
   }
 
   return (
@@ -27,10 +25,10 @@ function Register({ onRegister, onShowInfo }) {
       >
         <fieldset className="reg-log-form__form-inputs">
           <input className="reg-log-form__form-input" value={values.email} onChange={handleChange} name="email" placeholder="Email" type="email"
-          // required minLength="2" maxLength="40"
+            required minLength="2" maxLength="40"
           />
           <input className="reg-log-form__form-input" value={values.password} onChange={handleChange} name="password" placeholder="Пароль" type="password"
-          // required minLength="2" maxLength="40"
+            required minLength="2" maxLength="40"
           />
         </fieldset>
       </ RegLogForm>

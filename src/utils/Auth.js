@@ -25,6 +25,35 @@ class Auth {
     .then(res => this._useServerResponse(res));
   }
 
+  login({ email, password }) {
+    return fetch(
+      `${this._baseUrl}/signin`,
+      {
+        method: 'POST',
+        headers: this._headers,
+        body: JSON.stringify({
+          email,
+          password
+        })
+      }
+    )
+    .then(res => this._useServerResponse(res));
+  }
+
+  checkToken(token) {
+    return fetch(
+      `${this._baseUrl}/users/me`,
+      {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization" : `Bearer ${token}`
+        }
+      }
+    )
+    .then(res => this._useServerResponse(res));
+  }
+
 }
 
 export default new Auth(authOptions);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Api from '../utils/Api';
 import Auth from '../utils/Auth';
@@ -19,7 +19,9 @@ import defaultAvatar from '../images/profile.jpg';
 
 function App() {
 
-  let loggedIn=true;
+  const history = useHistory();
+
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -155,17 +157,38 @@ function App() {
     .finally(() => setIsLoading(false));
   }
 
-  // Дописать
-  // function handleRegister({email, password}) {
-  //   Auth.register({email, password})
-  //   .then()
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-  // }
+  function handleRegister({email, password}) {
+    Auth.register({email, password})
+    .then((res) => {
+      setInfoMessage({
+        text: "Вы успешно зарегистрировались!",
+        isSuccessful: true
+      });
+      history.push("/sign-in");
+    })
+    .catch((err) => {
+      setInfoMessage({
+        text: "Что-то пошло не так! Попробуйте еще раз.",
+        isSuccessful: false
+      });
+      console.log(err);
+    });
+  }
 
-  function handleInfoMessage(message) {
-    setInfoMessage(message);
+  function handleLogin({ email, password }) {
+    Auth.login({ email, password })
+      .then((data) => {
+        localStorage.setItem("token", data.token);
+        setLoggedIn(true);
+        history.push("/");
+      })
+      .catch((err) => {
+        setInfoMessage({
+          text: "Что-то пошло не так! Попробуйте еще раз.",
+          isSuccessful: false
+        });
+        console.log(err);
+      });
   }
 
   useEffect(() => {
@@ -207,11 +230,13 @@ function App() {
       <Header />
       <Switch>
         <Route path="/sign-in">
-          <Login />
+          <Login
+            onLogin={handleLogin}
+          />
         </Route>
         <Route path="/sign-up">
           <Register
-            onShowInfo={handleInfoMessage}
+            onRegister={handleRegister}
           />
         </Route>
         <ProtectedRoute

@@ -1,12 +1,17 @@
 import useForm from '../hooks/useForm';
 import RegLogForm from './RegLogForm';
 
-function Login({ onSubmit }) {
+function Login({ onLogin }) {
 
   const {values, handleChange, setValues} = useForm({
     email: '',
     password: ''
   });
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onLogin(values);
+  }
 
   return (
     <div className="reg-log-form page-section">
@@ -14,7 +19,7 @@ function Login({ onSubmit }) {
         name="login"
         title="Вход"
         buttonText="Войти"
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
       >
         <fieldset className="reg-log-form__form-inputs">
           <input className="reg-log-form__form-input" value={values.email} onChange={handleChange} name="email" placeholder="Email" type="email" required minLength="2" maxLength="40" />
