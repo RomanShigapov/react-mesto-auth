@@ -20,7 +20,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
 
   useEffect(() => {
     setValues(currentUser);
-   },[currentUser]);
+  },[currentUser]);
+
+  useEffect(() => {
+    if (isOpen) { setValues(currentUser) }
+  }, [isOpen]);
 
   return (
     <PopupWithForm
