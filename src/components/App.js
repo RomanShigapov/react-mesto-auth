@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Api from '../utils/Api';
@@ -22,6 +22,7 @@ function App() {
   const history = useHistory();
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -180,6 +181,7 @@ function App() {
       .then((data) => {
         localStorage.setItem("token", data.token);
         setLoggedIn(true);
+        setUserEmail(email);
         history.push("/");
       })
       .catch((err) => {
@@ -190,6 +192,31 @@ function App() {
         console.log(err);
       });
   }
+
+  const checkToken = useCallback(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    Auth.checkToken(token)
+    .then((res) => {
+        setLoggedIn(true);
+        setUserEmail(res.data.email);
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, [history]);
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    setLoggedIn(false);
+  }
+
+  useEffect(() => {
+    checkToken()
+  }, [checkToken]);
 
   useEffect(() => {
     Api.getUserInfo()
@@ -227,7 +254,10 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Header />
+      <Header
+        userEmail={userEmail}
+        onLogout={handleLogout}
+      />
       <Switch>
         <Route path="/sign-in">
           <Login

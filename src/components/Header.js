@@ -1,6 +1,6 @@
 import { Switch, Route, Link } from 'react-router-dom';
 
-function Header() {
+function Header({ userEmail, onLogout}) {
   return (
     <header className="header page-section">
         <Link to="/" className="header__logo"></Link>
@@ -12,8 +12,8 @@ function Header() {
             <Link to="/sign-in" className="header__link">Войти</Link>
           </Route>
           <Route exact path="/">
-            <p className='header__email'>email@yandex.ru</p>
-            <Link to="/sign-in" className="header__link">Выйти</Link>
+            <p className='header__email'>{userEmail}</p>
+            <Link onClick={onLogout} to="/sign-in" className="header__link">Выйти</Link>
           </Route>
         </Switch>
     </header>

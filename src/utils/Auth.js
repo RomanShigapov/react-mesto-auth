@@ -46,7 +46,7 @@ class Auth {
       {
         method: 'GET',
         headers: {
-          "Content-Type": "application/json",
+          ...this._headers,
           "Authorization" : `Bearer ${token}`
         }
       }
