@@ -214,6 +214,12 @@ function App() {
     setLoggedIn(false);
   }
 
+  function closeByEscape(evt) {
+    if(evt.key === 'Escape') {
+      closeAllPopups();
+    }
+  }
+
   useEffect(() => {
     checkToken()
   }, [checkToken]);
@@ -239,11 +245,6 @@ function App() {
   },[]);
 
   useEffect(() => {
-    function closeByEscape(evt) {
-      if(evt.key === 'Escape') {
-        closeAllPopups();
-      }
-    }
     if(isOpen) {
       document.addEventListener('keydown', closeByEscape);
       return () => {

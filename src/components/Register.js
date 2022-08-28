@@ -32,7 +32,7 @@ function Register({ onRegister }) {
           />
         </fieldset>
       </ RegLogForm>
-      <Link to="/sign-in" className="reg-log-form__link">Уже зарегистрированы? Войти</Link>
+      <p className="reg-log-form__signin">Уже зарегистрированы? <Link to="/sign-in" className="reg-log-form__link">Войти</Link></p>
     </div>
   );
 }
