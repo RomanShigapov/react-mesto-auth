@@ -6,7 +6,7 @@ class Api {
     this._headers = config.headers;
   }
 
-  useServerResponse(res) {
+  _useServerResponse(res) {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
   }
 
@@ -17,7 +17,7 @@ class Api {
         headers: this._headers
       }
     )
-    .then(res => this.useServerResponse(res));
+    .then(res => this._useServerResponse(res));
   }
 
   addCard({ name, link }) {
@@ -32,7 +32,7 @@ class Api {
         })
       }
     )
-    .then(res => this.useServerResponse(res));
+    .then(res => this._useServerResponse(res));
   }
 
   deleteCard(сardId) {
@@ -43,7 +43,7 @@ class Api {
         headers: this._headers
       }
     )
-    .then(res => this.useServerResponse(res));
+    .then(res => this._useServerResponse(res));
   }
 
   setCardLike(сardId, like) {
@@ -54,7 +54,7 @@ class Api {
         headers: this._headers
       }
     )
-    .then(res => this.useServerResponse(res));
+    .then(res => this._useServerResponse(res));
   }
 
 
@@ -65,7 +65,7 @@ class Api {
         headers: this._headers
       }
     )
-    .then(res => this.useServerResponse(res));
+    .then(res => this._useServerResponse(res));
   }
 
   setUserInfo({name, about}) {
@@ -80,7 +80,7 @@ class Api {
         })
       }
     )
-    .then(res => this.useServerResponse(res));
+    .then(res => this._useServerResponse(res));
   }
 
   setUserPic(avatar) {
@@ -94,7 +94,7 @@ class Api {
         })
       }
     )
-    .then(res => this.useServerResponse(res));
+    .then(res => this._useServerResponse(res));
   }
 }
 

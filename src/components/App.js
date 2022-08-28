@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Api from '../utils/Api';
+import Auth from '../utils/Auth';
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
@@ -10,6 +11,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import DeleteCardConfirmationPopup from './DeleteCardConfirmationPopup';
+import InfoTooltip from './InfoTooltip';
 import Login from './Login';
 import Register from './Register';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -33,6 +35,8 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isDeleteCardConfirmationPopupOpen, setIsDeleteCardConfirmationPopup] = useState(false);
 
+  const [infoMessage, setInfoMessage] = useState(null);
+
   const [selectedCard, setSelectedCard] = useState({
       name: '',
       link: '',
@@ -40,7 +44,7 @@ function App() {
       _id: ''
   });
 
-  const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || isDeleteCardConfirmationPopupOpen || selectedCard.isOpen;
+  const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || isDeleteCardConfirmationPopupOpen || selectedCard.isOpen || infoMessage;
 
   const [cards, setCards] = useState([]);
 
@@ -128,6 +132,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsDeleteCardConfirmationPopup(false);
+    setInfoMessage(null);
 
     setSelectedCard({
       name: '',
@@ -148,6 +153,19 @@ function App() {
       console.log(err);
     })
     .finally(() => setIsLoading(false));
+  }
+
+  // Дописать
+  // function handleRegister({email, password}) {
+  //   Auth.register({email, password})
+  //   .then()
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  // }
+
+  function handleInfoMessage(message) {
+    setInfoMessage(message);
   }
 
   useEffect(() => {
@@ -192,7 +210,9 @@ function App() {
           <Login />
         </Route>
         <Route path="/sign-up">
-          <Register />
+          <Register
+            onShowInfo={handleInfoMessage}
+          />
         </Route>
         <ProtectedRoute
           exact path="/"
@@ -239,6 +259,10 @@ function App() {
         onConfirmDelete={handleCardDelete}
         isLoading={isLoading}
         card={selectedCard}
+      />
+      <InfoTooltip
+        message={infoMessage}
+        onClose={closeAllPopups}
       />
     </CurrentUserContext.Provider>
   );

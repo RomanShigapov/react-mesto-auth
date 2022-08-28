@@ -66,6 +66,10 @@
   @import url(./blocks/popup/__image/popup__image.css);
   @import url(./blocks/popup/__image-container/popup__image-container.css);
   @import url(./blocks/popup/__image-caption/popup__image-caption.css);
+  @import url(./blocks/popup/__title-tooltip/popup__title-tooltip.css);
+  @import url(./blocks/popup/__icon/popup__icon.css);
+    @import url(./blocks/popup/__icon/_type/popup__icon_type_success.css);
+    @import url(./blocks/popup/__icon/_type/popup__icon_type_failure.css);
 
 @import url(./blocks/reg-log-form/reg-log-form.css);
   @import url(./blocks/reg-log-form/__title/reg-log-form__title.css);
