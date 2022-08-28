@@ -21,6 +21,7 @@
     * Использование библиотеки React для рендеринга веб приложения, с использованием хуков useState и useEffect
     * Применение в работе React.CreateContext, а так же React.useRef для непосредственного управления DOM элементами.
     * React Router
+    * LocalStorage
 
 
 ### Макет
