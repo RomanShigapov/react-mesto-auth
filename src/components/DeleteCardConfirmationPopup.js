@@ -1,7 +1,12 @@
-import PopupWithForm from './PopupWithForm';
+import PopupWithForm from "./PopupWithForm";
 
-function DeleteCardConfirmationPopup({ isOpen, onClose, onConfirmDelete, isLoading, card }) {
-
+function DeleteCardConfirmationPopup({
+  isOpen,
+  onClose,
+  onConfirmDelete,
+  isLoading,
+  card,
+}) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
@@ -18,10 +23,8 @@ function DeleteCardConfirmationPopup({ isOpen, onClose, onConfirmDelete, isLoadi
       title="Удалить, вы уверены?"
       buttonText="Да"
       buttonLoadingText="Удаление..."
-    >
-    </PopupWithForm>
+    ></PopupWithForm>
   );
-
 }
 
 export default DeleteCardConfirmationPopup;

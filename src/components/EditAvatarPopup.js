@@ -1,8 +1,7 @@
-import { useRef, useEffect} from 'react';
-import PopupWithForm from './PopupWithForm';
+import { useRef, useEffect } from "react";
+import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
-
   const inputAvatarRef = useRef();
 
   function handleSubmit(evt) {
@@ -12,7 +11,9 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
   }
 
   useEffect(() => {
-    if (isOpen) { inputAvatarRef.current.value=''; }
+    if (isOpen) {
+      inputAvatarRef.current.value = "";
+    }
   }, [isOpen]);
 
   return (
@@ -28,7 +29,14 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
     >
       <fieldset className="popup__form-inputs">
         <div className="popup__form-container">
-          <input className="popup__form-input popup__form-input_new-card-image-link" ref={inputAvatarRef} name="link" placeholder="Ссылка на картинку" type="url" required />
+          <input
+            className="popup__form-input popup__form-input_new-card-image-link"
+            ref={inputAvatarRef}
+            name="link"
+            placeholder="Ссылка на картинку"
+            type="url"
+            required
+          />
           <span className="popup__form-input-error link-error"></span>
         </div>
       </fieldset>
@@ -36,4 +44,4 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
   );
 }
 
-export default EditAvatarPopup
+export default EditAvatarPopup;
